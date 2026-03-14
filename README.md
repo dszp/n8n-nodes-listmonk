@@ -78,7 +78,12 @@ The OpenAPI spec has been enhanced beyond the upstream Listmonk spec with additi
 
 ## Credits
 
-Originally created by [Sven Huijbrechts](https://dotsndots.be) as [`@tosvenson/n8n-nodes-listmonk`](https://github.com/toSvenson/n8n-nodes-listmonk).
+This node builds on the work of several upstream authors:
+
+- Originally created by [Tobias Wiesing](https://hueske.digital) at [`loopion/n8n-nodes-listmonk`](https://github.com/loopion/n8n-nodes-listmonk)
+- Forked and extended by [Martin Fenner](https://blog.front-matter.de) at [`front-matter/n8n-nodes-listmonk`](https://github.com/front-matter/n8n-nodes-listmonk)
+- Forked and extended by [Sven Huijbrechts](https://dotsndots.be) at [`toSvenson/n8n-nodes-listmonk`](https://github.com/toSvenson/n8n-nodes-listmonk)
+- Forked and rebranded by [David Szpunar](https://david.szpunar.com) as [`@dszp/n8n-nodes-listmonk`](https://github.com/dszp/n8n-nodes-listmonk)
 
 ## Resources
 
