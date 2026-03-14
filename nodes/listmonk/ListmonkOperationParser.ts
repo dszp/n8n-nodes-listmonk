@@ -4,20 +4,6 @@ import {
   type OperationContext,
 } from '@devlikeapro/n8n-openapi-node';
 
-/** Convert a string to camelCase (avoids lodash runtime dependency). */
-function camelCase(str: string): string {
-  return str
-    .replace(/[^a-zA-Z0-9]+/g, ' ')
-    .trim()
-    .split(' ')
-    .map((word, i) =>
-      i === 0
-        ? word.toLowerCase()
-        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
-    )
-    .join('');
-}
-
 /**
  * Custom operation parser that produces n8n-compliant operation names.
  *
@@ -48,9 +34,9 @@ export class ListmonkOperationParser extends DefaultOperationParser {
   }
 
   value(operation: OpenAPIV3.OperationObject, context: OperationContext): string {
-    const name = this.name(operation, context);
-    // Use camelCase for value (n8n convention)
-    return camelCase(name);
+    // The builder uses name() for displayOptions but value() for the dropdown.
+    // They must match or fields won't show for the selected operation.
+    return this.name(operation, context);
   }
 
   action(operation: OpenAPIV3.OperationObject, context: OperationContext): string {

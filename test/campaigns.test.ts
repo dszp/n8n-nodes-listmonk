@@ -27,17 +27,17 @@ describe('Campaigns resource', () => {
 
   test('has expected CRUD operations', () => {
     const ops = getOperationsForResource('Campaigns');
-    expect(ops).toContain('getMany');
-    expect(ops).toContain('get');
-    expect(ops).toContain('create');
-    expect(ops).toContain('update');
-    expect(ops).toContain('delete');
+    expect(ops).toContain('Get Many');
+    expect(ops).toContain('Get');
+    expect(ops).toContain('Create');
+    expect(ops).toContain('Update');
+    expect(ops).toContain('Delete');
   });
 
   test('has campaign-specific operations', () => {
     const ops = getOperationsForResource('Campaigns');
-    expect(ops).toContain('updateCampaignStatusById');
-    expect(ops).toContain('getCampaignAnalytics');
+    expect(ops).toContain('Update Campaign Status By Id');
+    expect(ops).toContain('Get Campaign Analytics');
   });
 
   test('create/update fields exist', () => {
