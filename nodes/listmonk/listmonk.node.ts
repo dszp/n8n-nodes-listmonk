@@ -12,6 +12,10 @@ const config: N8NPropertiesBuilderConfig = {
 const parser = new N8NPropertiesBuilder(doc as any, config);
 const properties = parser.build();
 
+// n8n loads the class by the filename stem (lowercase "listmonk"), so we
+// need a lowercase export alias alongside the PascalCase class name.
+export { Listmonk as listmonk };
+
 export class Listmonk implements INodeType {
   description: INodeTypeDescription = {
     displayName: 'Listmonk',
