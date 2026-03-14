@@ -39,6 +39,9 @@ importers:
       nock:
         specifier: ^14.0.10
         version: 14.0.10
+      openapi-types:
+        specifier: ^12.1.3
+        version: 12.1.3
       prettier:
         specifier: ^3.3.2
         version: 3.8.0

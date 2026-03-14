@@ -1,26 +1,24 @@
 {
-  "name": "@tosvenson/n8n-nodes-listmonk",
-  "version": "1.0.27b4",
-  "description": "n8n node for Listmonk API",
+  "name": "@dszp/n8n-nodes-listmonk",
+  "version": "0.1.0",
+  "description": "n8n community node for Listmonk email & newsletter API",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
-  "homepage": "https://dotsndots.be",
+  "homepage": "",
   "author": {
-    "name": "Sven Huijbrechts",
-    "email": "sven.huijbrechts@dotsndots.be"
+    "name": "David Szpunar",
+    "email": ""
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:toSvenson/n8n-nodes-listmonk.git"
+    "url": ""
   },
   "engines": {
-    "node": ">=18.10",
-    "pnpm": ">=9.1"
+    "node": ">=18.10"
   },
   "packageManager": "pnpm@9.1.4",
-  "main": "index.js",
   "scripts": {
     "build": "tsc && gulp build:icons",
     "dev": "tsc --watch",
@@ -54,6 +52,7 @@
     "js-yaml": "^4.1.0",
     "n8n-workflow": "*",
     "nock": "^14.0.10",
+    "openapi-types": "^12.1.3",
     "prettier": "^3.3.2",
     "ts-jest": "^29.4.1",
     "typescript": "^5.5.3",

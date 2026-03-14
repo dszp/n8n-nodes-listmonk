@@ -8,7 +8,7 @@ This node integrates the Listmonk API into n8n to manage lists, subscribers, cam
 
 ## Installation
 
-Add the `@tosvenson/n8n-nodes-listmonk` package to your n8n installation:
+Add the `@dszp/n8n-nodes-listmonk` package to your n8n installation:
 
 ![installation.png](installation.png)
 
