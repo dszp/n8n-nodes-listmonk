@@ -40,8 +40,9 @@ function skipEmptyQueryParams(properties: INodeProperties[]): void {
     if (send?.type !== 'query') continue;
 
     // JSON array fields (list_id, tags, status, ids, etc.) — don't send "[]"
+    // $value is the parsed value (an array), so check .length not string equality
     if (prop.type === 'json' && prop.default === '[]') {
-      send.value = "={{ $value && $value !== '[]' ? $value : undefined }}";
+      send.value = '={{ $value && $value.length ? $value : undefined }}';
     }
 
     // String fields with empty default — don't send ""
