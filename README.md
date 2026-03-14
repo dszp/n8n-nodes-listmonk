@@ -46,7 +46,7 @@ The node makes requests to the admin API at `{baseUrl}/api`.
 
 ## Compatibility
 
-- Tested with Listmonk v3.x and v4.x
+- Tested with Listmonk v6.0.0+
 - Requires n8n v1.0.0 or later
 - Supports use as an AI agent tool (`usableAsTool: true`)
 
