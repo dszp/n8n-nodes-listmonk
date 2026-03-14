@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.2] - 2026-03-14
+
+### Changed
+
+- Test release to verify GitHub Actions OIDC trusted publishing to npm
+
 ## [0.0.1] - 2026-03-14
 
 Initial release under `@dszp/n8n-nodes-listmonk`, forked from `@tosvenson/n8n-nodes-listmonk`.
