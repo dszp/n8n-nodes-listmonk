@@ -1,7 +1,7 @@
-import { listmonk } from '../nodes/listmonk/listmonk.node';
+import { Listmonk } from '../nodes/listmonk/listmonk.node';
 
 describe('Campaigns - retrieve all campaigns', () => {
-  const node = new listmonk();
+  const node = new Listmonk();
   const props: any[] = node.description.properties as any[];
 
   function getProp(name: string) {

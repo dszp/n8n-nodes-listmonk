@@ -1,48 +1,49 @@
-import {
+import type {
   IAuthenticateGeneric,
   ICredentialTestRequest,
   ICredentialType,
   INodeProperties,
-} from "n8n-workflow";
+} from 'n8n-workflow';
 
 export class listmonkApi implements ICredentialType {
-  name = "listmonkApi";
-  displayName = "Listmonk API";
-  documentationUrl = "https://listmonk.app/docs/api/";
+  name = 'listmonkApi';
+  displayName = 'Listmonk API';
+  documentationUrl = 'https://listmonk.app/docs/apis/apis/';
+  icon = 'file:logo.svg' as const;
   properties: INodeProperties[] = [
     {
-      displayName: "Base URL",
-      name: "baseUrl",
-      type: "string",
-      default: "",
-      placeholder: "https://listmonk.example.com",
+      displayName: 'Base URL',
+      name: 'baseUrl',
+      type: 'string',
+      default: '',
+      placeholder: 'https://listmonk.example.com',
       required: true,
-      description: "Your Listmonk base URL (without trailing slash).",
+      description: 'Your Listmonk base URL (without trailing slash).',
     },
     {
-      displayName: "Username",
-      name: "username",
-      type: "string",
-      default: "",
+      displayName: 'Username',
+      name: 'username',
+      type: 'string',
+      default: '',
       required: true,
     },
     {
-      displayName: "Password",
-      name: "password",
-      type: "string",
+      displayName: 'Password',
+      name: 'password',
+      type: 'string',
       typeOptions: { password: true },
-      default: "",
+      default: '',
       required: true,
     },
   ];
 
   // Use HTTP Basic Auth for Listmonk admin API
   authenticate: IAuthenticateGeneric = {
-    type: "generic",
+    type: 'generic',
     properties: {
       auth: {
-        username: "={{$credentials.username}}",
-        password: "={{$credentials.password}}",
+        username: '={{$credentials.username}}',
+        password: '={{$credentials.password}}',
       },
     },
   };
@@ -51,9 +52,9 @@ export class listmonkApi implements ICredentialType {
   test: ICredentialTestRequest = {
     request: {
       // Listmonk admin API is served under /api
-      url: "=/api/lists",
-      baseURL: "={{$credentials.baseUrl}}",
-      method: "GET",
+      url: '=/api/lists',
+      baseURL: '={{$credentials.baseUrl}}',
+      method: 'GET',
     },
   };
 }
