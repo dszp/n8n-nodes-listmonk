@@ -1,8 +1,8 @@
 name: Update Listmonk API
 
 on:
-  schedule:
-    - cron: '0 3 * * *'
+  # schedule:
+  #   - cron: '0 3 * * *'
   workflow_dispatch:
 
 jobs:
@@ -12,21 +12,21 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # Use a PAT if provided so tag pushes trigger other workflows
           token: ${{ secrets.RELEASE_PAT != '' && secrets.RELEASE_PAT || github.token }}
           fetch-depth: 0
 
-      - name: Set up pnpmx
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9.1.4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '22'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install deps

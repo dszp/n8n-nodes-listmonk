@@ -1,4 +1,4 @@
-.PHONY: clean build link start dev up-listmonk
+.PHONY: clean build link start dev lint tests up-listmonk
 
 lint:
 	pnpm run lint
@@ -10,14 +10,14 @@ link:
 	npm link
 
 start:
-	cd ~/.n8n/custom && npm link @tosvenson/n8n-nodes-listmonk && n8n start
+	cd ~/.n8n/custom && npm link @dszp/n8n-nodes-listmonk && n8n start
 
 tests:
 	pnpm run test
 
 dev:
 	make clean
-	# make lint
+	make lint
 	make tests
 	make build
 	make link

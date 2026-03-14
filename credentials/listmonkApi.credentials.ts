@@ -1,59 +1,61 @@
-import {
+import type {
   IAuthenticateGeneric,
   ICredentialTestRequest,
   ICredentialType,
   INodeProperties,
-} from "n8n-workflow";
+} from 'n8n-workflow';
 
 export class listmonkApi implements ICredentialType {
-  name = "listmonkApi";
-  displayName = "Listmonk API";
-  documentationUrl = "https://listmonk.app/docs/api/";
+  name = 'listmonkApi';
+  displayName = 'Listmonk API';
+  documentationUrl = 'https://listmonk.app/docs/apis/apis/';
+  icon = 'file:logo.svg' as const;
   properties: INodeProperties[] = [
     {
-      displayName: "Base URL",
-      name: "baseUrl",
-      type: "string",
-      default: "",
-      placeholder: "https://listmonk.example.com",
+      displayName: 'Base URL',
+      name: 'baseUrl',
+      type: 'string',
+      default: '',
+      placeholder: 'https://listmonk.example.com',
       required: true,
-      description: "Your Listmonk base URL (without trailing slash).",
+      description: 'Your Listmonk base URL (without trailing slash)',
     },
     {
-      displayName: "Username",
-      name: "username",
-      type: "string",
-      default: "",
+      displayName: 'API Username',
+      name: 'username',
+      type: 'string',
+      default: '',
       required: true,
+      description: 'API user created in Listmonk under Admin > Users',
     },
     {
-      displayName: "Password",
-      name: "password",
-      type: "string",
+      displayName: 'API Token',
+      name: 'password',
+      type: 'string',
       typeOptions: { password: true },
-      default: "",
+      default: '',
       required: true,
+      description: 'API token for the user, generated in Listmonk under Admin > Users',
     },
   ];
 
-  // Use HTTP Basic Auth for Listmonk admin API
+  // Listmonk accepts Basic Auth with api_user:token credentials
   authenticate: IAuthenticateGeneric = {
-    type: "generic",
+    type: 'generic',
     properties: {
       auth: {
-        username: "={{$credentials.username}}",
-        password: "={{$credentials.password}}",
+        username: '={{$credentials.username}}',
+        password: '={{$credentials.password}}',
       },
     },
   };
 
-  // Basic smoke test: fetch lists to validate credentials and base URL
+  // Smoke test: fetch lists to validate credentials and base URL
   test: ICredentialTestRequest = {
     request: {
-      // Listmonk admin API is served under /api
-      url: "=/api/lists",
-      baseURL: "={{$credentials.baseUrl}}",
-      method: "GET",
+      url: '=/api/lists',
+      baseURL: '={{$credentials.baseUrl}}',
+      method: 'GET',
     },
   };
 }

@@ -1,8 +1,8 @@
 {
-  "node": "n8n-nodes-base.listmonk",
-  "nodeVersion": "1.0",
+  "node": "@dszp/n8n-nodes-listmonk.listmonk",
+  "nodeVersion": "0.0.1",
   "codexVersion": "1.0",
-  "categories": ["Marketing", "Email"],
+  "categories": ["Marketing & Content"],
   "resources": {
     "credentialDocumentation": [
       {
