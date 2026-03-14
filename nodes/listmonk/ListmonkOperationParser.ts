@@ -56,21 +56,25 @@ export class ListmonkOperationParser extends DefaultOperationParser {
   action(operation: OpenAPIV3.OperationObject, context: OperationContext): string {
     const name = this.name(operation, context);
     const resource = this.extractResource(operation)?.toLowerCase() || '';
+    // Derive singular form for "a <resource>" actions
+    const singular = resource.endsWith('s') ? resource.slice(0, -1) : resource;
+    // Derive plural form for "many <resources>" actions
+    const plural = resource.endsWith('s') ? resource : resource + 's';
 
     if (name === 'Get Many') {
-      return `Get many ${resource}s`;
+      return `Get many ${plural}`;
     }
     if (name === 'Get') {
-      return `Get a ${resource}`;
+      return `Get a ${singular}`;
     }
     if (name === 'Create') {
-      return `Create a ${resource}`;
+      return `Create a ${singular}`;
     }
     if (name === 'Update') {
-      return `Update a ${resource}`;
+      return `Update a ${singular}`;
     }
     if (name === 'Delete') {
-      return `Delete a ${resource}`;
+      return `Delete a ${singular}`;
     }
 
     // For other operations, use sentence case with resource context
@@ -106,12 +110,10 @@ export class ListmonkOperationParser extends DefaultOperationParser {
       return true;
     }
 
-    // Match specific list-like operation names
+    // Match specific list-like operation names (only one per resource to avoid duplicates)
     const listPatterns = [
       'get public lists',
       'get import subscribers',
-      'get import subscriber logs',
-      'get running campaign stats',
     ];
     if (listPatterns.includes(nameLower)) return true;
 

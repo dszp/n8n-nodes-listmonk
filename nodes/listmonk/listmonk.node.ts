@@ -1,5 +1,4 @@
 import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
-import { NodeConnectionTypes } from 'n8n-workflow';
 import {
   N8NPropertiesBuilder,
   type N8NPropertiesBuilderConfig,
@@ -25,8 +24,8 @@ export class Listmonk implements INodeType {
     defaults: {
       name: 'Listmonk',
     },
-    inputs: [NodeConnectionTypes.Main],
-    outputs: [NodeConnectionTypes.Main],
+    inputs: ['main'],
+    outputs: ['main'],
     usableAsTool: true,
     credentials: [
       {
