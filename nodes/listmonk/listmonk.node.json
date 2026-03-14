@@ -1,6 +1,6 @@
 {
   "node": "@dszp/n8n-nodes-listmonk.listmonk",
-  "nodeVersion": "0.1.0",
+  "nodeVersion": "0.0.1",
   "codexVersion": "1.0",
   "categories": ["Marketing & Content"],
   "resources": {
