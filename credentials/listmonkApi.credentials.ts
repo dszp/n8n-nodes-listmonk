@@ -18,26 +18,28 @@ export class listmonkApi implements ICredentialType {
       default: '',
       placeholder: 'https://listmonk.example.com',
       required: true,
-      description: 'Your Listmonk base URL (without trailing slash).',
+      description: 'Your Listmonk base URL (without trailing slash)',
     },
     {
-      displayName: 'Username',
+      displayName: 'API Username',
       name: 'username',
       type: 'string',
       default: '',
       required: true,
+      description: 'API user created in Listmonk under Admin > Users',
     },
     {
-      displayName: 'Password',
+      displayName: 'API Token',
       name: 'password',
       type: 'string',
       typeOptions: { password: true },
       default: '',
       required: true,
+      description: 'API token for the user, generated in Listmonk under Admin > Users',
     },
   ];
 
-  // Use HTTP Basic Auth for Listmonk admin API
+  // Listmonk accepts Basic Auth with api_user:token credentials
   authenticate: IAuthenticateGeneric = {
     type: 'generic',
     properties: {
@@ -48,10 +50,9 @@ export class listmonkApi implements ICredentialType {
     },
   };
 
-  // Basic smoke test: fetch lists to validate credentials and base URL
+  // Smoke test: fetch lists to validate credentials and base URL
   test: ICredentialTestRequest = {
     request: {
-      // Listmonk admin API is served under /api
       url: '=/api/lists',
       baseURL: '={{$credentials.baseUrl}}',
       method: 'GET',
