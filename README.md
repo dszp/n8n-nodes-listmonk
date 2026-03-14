@@ -92,6 +92,13 @@ This node builds on the work of several upstream authors:
 - [Changelog](CHANGELOG.md)
 - [TODO](TODO.md)
 
+## Alternatives
+
+The following nodes are available for [n8n](https://n8n.io) that implement some of the ListMonk API. As of this writing they remain untested but are provided for comparison/reference:
+
+- [n8n-nodes-listmonk-service](https://github.com/anantanandgupta/n8n-nodes-listmonk-service) available on [npm](https://www.npmjs.com/package/n8n-nodes-listmonk-service) - from two years ago but with updates two weeks ago, this node contains Lists, Subscribers, and Transactional Email functions only per the documentation.
+- [n8n-nodes-listmonk](https://github.com/LucasSovre/listmonk-n8n) available on [npm](https://www.npmjs.com/package/n8n-nodes-listmonk) - canonical name, but no updates in two years
+
 ## License
 
 [MIT](LICENSE)
