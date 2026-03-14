@@ -7,6 +7,7 @@ import type { INodeProperties } from 'n8n-workflow';
 export function fixupProperties(properties: INodeProperties[]): INodeProperties[] {
   fixNullDefaults(properties);
   fixPaginationDefaults(properties);
+  skipEmptyQueryParams(properties);
   injectPostReceive(properties);
   return properties;
 }
@@ -28,6 +29,24 @@ function fixPaginationDefaults(properties: INodeProperties[]): void {
     }
     if (prop.name === 'per_page' && prop.default === 0) {
       prop.default = 20;
+    }
+  }
+}
+
+/** Skip sending query params when they hold their empty default value. */
+function skipEmptyQueryParams(properties: INodeProperties[]): void {
+  for (const prop of properties) {
+    const send = (prop as any).routing?.send;
+    if (send?.type !== 'query') continue;
+
+    // JSON array fields (list_id, tags, status, ids, etc.) — don't send "[]"
+    if (prop.type === 'json' && prop.default === '[]') {
+      send.value = "={{ $value && $value !== '[]' ? $value : undefined }}";
+    }
+
+    // String fields with empty default — don't send ""
+    if (prop.type === 'string' && prop.default === '') {
+      send.value = '={{ $value || undefined }}';
     }
   }
 }
