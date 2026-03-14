@@ -79,4 +79,40 @@ describe('Campaigns resource', () => {
     expect(statusField).toBeDefined();
     expect(['string', 'options']).toContain(statusField.type);
   });
+
+  test('tags field has empty array default instead of null', () => {
+    const tagsFields = props.filter((p: any) => p.name === 'tags');
+    for (const f of tagsFields) {
+      if (typeof f.default === 'string') {
+        expect(f.default).toBe('[]');
+        expect(f.default).not.toContain('null');
+      }
+    }
+  });
+
+  test('page field defaults to 1', () => {
+    const pageFields = props.filter(
+      (p: any) =>
+        p.name === 'page' &&
+        p.displayOptions?.show?.resource?.includes('Campaigns'),
+    );
+    for (const f of pageFields) {
+      expect(f.default).toBe(1);
+    }
+  });
+
+  test('Get Many operation has postReceive unwrapper', () => {
+    const opProp = props.find(
+      (p: any) =>
+        p.name === 'operation' &&
+        p.type === 'options' &&
+        p.displayOptions?.show?.resource?.includes('Campaigns'),
+    );
+    expect(opProp).toBeDefined();
+    const getManyOpt = (opProp.options ?? []).find((o: any) => o.value === 'Get Many');
+    expect(getManyOpt).toBeDefined();
+    expect(getManyOpt.routing.output).toBeDefined();
+    expect(getManyOpt.routing.output.postReceive).toBeDefined();
+    expect(typeof getManyOpt.routing.output.postReceive[0]).toBe('function');
+  });
 });

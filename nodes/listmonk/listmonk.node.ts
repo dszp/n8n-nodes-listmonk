@@ -4,13 +4,14 @@ import {
   type N8NPropertiesBuilderConfig,
 } from '@devlikeapro/n8n-openapi-node';
 import { ListmonkOperationParser } from './ListmonkOperationParser';
+import { fixupProperties } from './fixupProperties';
 import * as doc from './openapi.json';
 
 const config: N8NPropertiesBuilderConfig = {
   operation: new ListmonkOperationParser(),
 };
 const parser = new N8NPropertiesBuilder(doc as any, config);
-const properties = parser.build();
+const properties = fixupProperties(parser.build());
 
 // n8n loads the class by the filename stem (lowercase "listmonk"), so we
 // need a lowercase export alias alongside the PascalCase class name.

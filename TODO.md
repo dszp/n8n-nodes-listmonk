@@ -1,17 +1,29 @@
 # TODO
 
-## Near-term
+## Pagination UX: Return All / Limit Pattern
 
-- [ ] Consolidate duplicate smoke test (`nodes/listmonk/listmonk.spec.ts` overlaps with `test/listmonk.node.test.ts`)
-- [ ] Add tests for non-Campaign resources (Subscribers, Lists, Templates)
-- [ ] Review whether `gulpfile.js` icon copy could be replaced with a simpler `copyfiles` script
-- [ ] Set up `@dszp` npm scope and configure OIDC trusted publishing for GitHub Actions
+The current implementation fixes page/per_page defaults (page=1, per_page=20 instead of 0),
+but does not yet implement the full n8n-standard pagination UX pattern.
 
-## Future
+### What's needed
 
-- [ ] Re-enable OpenAPI spec fetch in `update-listmonk-api.yml` if upstream spec improves
-- [ ] Add Simplify toggle for operations returning many fields
-- [ ] Add returnAll/limit pattern for Get Many operations
-- [ ] Consider converting high-value resources to hand-written declarative definitions for better UX control
-- [ ] Update `node-actions.png` screenshot to reflect current operation names
-- [ ] Evaluate whether `js-yaml` and `yaml` dev dependencies are both needed (used by `make up-listmonk`)
+For all "Get Many" operations, replace the raw Page / Per Page number fields with:
+
+1. **Return All** toggle (boolean, default false)
+2. **Limit** field (number, shown when Return All is false, default 50)
+3. Auto-pagination logic that:
+   - When Return All = true: fetches all pages automatically
+   - When Return All = false: fetches up to the Limit count
+   - Hides the raw Page / Per Page fields
+
+### Why deferred
+
+Adding Return All / Limit requires:
+- Custom execute function or pagination-aware `postReceive` that makes multiple API calls
+- Hiding/showing fields dynamically based on toggle state
+- Significant testing across all list endpoints
+- Potential changes to the declarative routing approach (may need programmatic execution)
+
+### Affected resources
+
+All "Get Many" operations across: Subscribers, Lists, Campaigns, Bounces, Media, Templates, Import, Logs, Settings, Public.

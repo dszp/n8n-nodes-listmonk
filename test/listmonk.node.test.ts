@@ -57,4 +57,38 @@ describe('Listmonk node', () => {
       expect(Array.isArray(resource)).toBe(true);
     }
   });
+
+  test('no properties have null array defaults', () => {
+    const nullDefaults = props.filter(
+      (p: any) => typeof p.default === 'string' && p.default.includes('null'),
+    );
+    expect(nullDefaults).toHaveLength(0);
+  });
+
+  test('page defaults to 1 and per_page defaults to 20', () => {
+    const pageFields = props.filter((p: any) => p.name === 'page');
+    const perPageFields = props.filter((p: any) => p.name === 'per_page');
+    for (const f of pageFields) {
+      expect(f.default).toBe(1);
+    }
+    for (const f of perPageFields) {
+      expect(f.default).toBe(20);
+    }
+  });
+
+  test('operation options have postReceive for response unwrapping', () => {
+    const operations = props.filter(
+      (p: any) => p.name === 'operation' && p.type === 'options',
+    );
+    for (const op of operations) {
+      for (const option of op.options ?? []) {
+        if (option.routing) {
+          expect(option.routing.output).toBeDefined();
+          expect(option.routing.output.postReceive).toBeDefined();
+          expect(option.routing.output.postReceive.length).toBe(1);
+          expect(typeof option.routing.output.postReceive[0]).toBe('function');
+        }
+      }
+    }
+  });
 });
