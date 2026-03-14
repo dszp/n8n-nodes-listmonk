@@ -2,7 +2,6 @@
 
 ## Near-term
 
-- [ ] Update `.nvmrc` to match CI Node version (24) or remove it
 - [ ] Consolidate duplicate smoke test (`nodes/listmonk/listmonk.spec.ts` overlaps with `test/listmonk.node.test.ts`)
 - [ ] Add tests for non-Campaign resources (Subscribers, Lists, Templates)
 - [ ] Review whether `gulpfile.js` icon copy could be replaced with a simpler `copyfiles` script
