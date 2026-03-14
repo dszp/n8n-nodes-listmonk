@@ -1,4 +1,4 @@
-.PHONY: clean build link start dev up-listmonk
+.PHONY: clean build link start dev lint tests up-listmonk
 
 lint:
 	pnpm run lint
@@ -17,7 +17,7 @@ tests:
 
 dev:
 	make clean
-	# make lint
+	make lint
 	make tests
 	make build
 	make link

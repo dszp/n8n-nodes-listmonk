@@ -1,32 +1,91 @@
-# n8n node for Listmonk API
+# @dszp/n8n-nodes-listmonk
+
+n8n community node for the [Listmonk](https://listmonk.app/) email & newsletter API.
 
 ## Overview
 
-This node integrates the Listmonk API into n8n to manage lists, subscribers, campaigns, and related resources.
+This node integrates the Listmonk admin API into n8n, providing access to all major resources:
+
+- **Subscribers** — create, get, update, delete, manage lists, blocklist, export, bounces
+- **Lists** — create, get, update, delete
+- **Campaigns** — create, get, update, delete, status management, preview, analytics, test send
+- **Templates** — create, get, update, delete, preview, set default
+- **Media** — upload, get, delete
+- **Transactional** — send transactional emails
+- **Import** — import subscribers, check status, view logs
+- **Settings, Admin, Logs, Maintenance, Public** — full admin API coverage
 
 ![node-actions.png](node-actions.png)
 
 ## Installation
 
-Add the `@dszp/n8n-nodes-listmonk` package to your n8n installation:
+In your n8n instance, go to **Settings > Community Nodes** and install:
 
-![installation.png](installation.png)
+```
+@dszp/n8n-nodes-listmonk
+```
+
+Or install via the CLI:
+
+```bash
+# Self-hosted n8n
+cd ~/.n8n
+npm install @dszp/n8n-nodes-listmonk
+
+# Docker — add to your n8n environment
+N8N_COMMUNITY_PACKAGES=@dszp/n8n-nodes-listmonk
+```
 
 ## Configuration
 
-Configure the base URL of your Listmonk instance (e.g., `https://listmonk.example.com`) and provide admin credentials (HTTP Basic Auth). Requests are made to the admin API under `/api`.
+1. In n8n, create a new **Listmonk API** credential
+2. Enter your Listmonk base URL (e.g., `https://listmonk.example.com`) — no trailing slash
+3. Enter your admin username and password (HTTP Basic Auth)
+
+The node makes requests to the admin API at `{baseUrl}/api`.
+
+## Compatibility
+
+- Tested with Listmonk v3.x and v4.x
+- Requires n8n v1.0.0 or later
+- Supports use as an AI agent tool (`usableAsTool: true`)
 
 ## Development
 
-- Build: `pnpm build`
-- Watch: `pnpm dev`
-- Test: `pnpm test`
-- Lint: `pnpm lint`
-- Update OpenAPI: `make up-listmonk`
+```bash
+pnpm install          # Install dependencies
+pnpm build            # TypeScript compile + copy icons
+pnpm dev              # Watch mode
+pnpm test             # Run tests
+pnpm lint             # Lint check
+pnpm lint:fix         # Auto-fix lint issues
+make up-listmonk      # Convert OpenAPI YAML to JSON
+```
+
+### Local testing with n8n
+
+```bash
+make build && make link && make start
+```
+
+This builds, links the package globally, then starts n8n with the node available.
+
+## Architecture
+
+Node properties are auto-generated from the bundled [Listmonk OpenAPI spec](nodes/listmonk/openapi.json) using [`@devlikeapro/n8n-openapi-node`](https://github.com/nicobao/n8n-openapi-node). A custom `ListmonkOperationParser` maps the generated operation names to n8n conventions (Get, Create, Update, Delete, Get Many).
+
+The OpenAPI spec has been enhanced beyond the upstream Listmonk spec with additional fields and endpoints not present in the official documentation.
 
 ## Credits
 
-Originally created by [Sven Huijbrechts](https://dotsndots.be) as [`@tosvenson/n8n-nodes-listmonk`](https://github.com/toSvenson/n8n-nodes-listmonk). Node properties are auto-generated from the [Listmonk OpenAPI spec](https://listmonk.app/docs/apis/apis/) using [`@devlikeapro/n8n-openapi-node`](https://github.com/nicobao/n8n-openapi-node).
+Originally created by [Sven Huijbrechts](https://dotsndots.be) as [`@tosvenson/n8n-nodes-listmonk`](https://github.com/toSvenson/n8n-nodes-listmonk).
+
+## Resources
+
+- [Listmonk Documentation](https://listmonk.app/docs/)
+- [Listmonk API Reference](https://listmonk.app/docs/apis/apis/)
+- [Changelog](CHANGELOG.md)
+- [TODO](TODO.md)
 
 ## License
 
